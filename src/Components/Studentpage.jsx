@@ -116,6 +116,7 @@ function Studentpage() {
     feespaid: "",
     college: "",
     degree: "",
+    paymentmode:"",
   });
 
   const [refList, setRefList] = useState([
@@ -196,6 +197,14 @@ function Studentpage() {
   useEffect(() => {
     callApiData();
   }, []);
+  const deletestudentData = async (id) => {
+    await axios.delete(
+      "https://64bea16d5ee688b6250cba32.mockapi.io/StudentData/" + id
+    );
+    alert("Student deleted");
+
+    callApiData();
+  };
 
   // Table content End
 
@@ -375,6 +384,16 @@ function Studentpage() {
                             type="number"
                             name="pendingfees"
                             placeholder="Pending Fees"
+                            autoComplete="off"
+                            onChange={handleChange}
+                            required
+                          ></input>
+                        </div>
+                        <div className="inputstudent">
+                          <input
+                            type="number"
+                            name="paymentmode"
+                            placeholder="Payment Mode"
                             autoComplete="off"
                             onChange={handleChange}
                             required
@@ -574,7 +593,7 @@ function Studentpage() {
                                     />
                                     <MdDelete
                                       id="dlt-icon"
-                                      onClick={() => deleteref(apiData.id)}
+                                      onClick={() => deletestudentData(apiData.id)}
                                     />
                                   </TableCell>
                                 </TableRow>
