@@ -173,3 +173,9 @@ input::-webkit-inner-spin-button {
   margin: 0 10px;
   cursor: pointer;
 }
+#navz{
+display: none;
+}
+.mods{
+  z-index: 99999;
+}

@@ -64,7 +64,7 @@ function Referralpage() {
   return (
     <>
       <div>
-        <NavBar />
+        <NavBar/>
         <div className="crd-bg">
           <div className="card-refdetails">
             <Container>
@@ -97,6 +97,7 @@ function Referralpage() {
               {/* /modal */}
               <Modal
                 show={show}
+                className="mods"
                 onHide={handleClose}
                 backdrop="static"
                 keyboard={false}
