@@ -248,14 +248,14 @@ function Studentpage() {
                 <div
                   style={{
                     display: "flex",
-                    width: "50%",
+                   
                     justifyContent: "space-around",
                   }}
                 >
                   <div className="search-full">
                     <input
                       type="search"
-                      placeholder="Search Referral"
+                      placeholder="Search Student..."
                       id="searchbar-ref"
                     ></input>
                     <FcSearch id="search-icon" />
@@ -391,7 +391,7 @@ function Studentpage() {
                         </div>
                         <div className="inputstudent">
                           <input
-                            type="number"
+                            type="text"
                             name="paymentmode"
                             placeholder="Payment Mode"
                             autoComplete="off"

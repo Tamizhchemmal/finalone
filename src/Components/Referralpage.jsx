@@ -74,7 +74,7 @@ function Referralpage() {
                 <div
                   style={{
                     display: "flex",
-                    width: "50%",
+                    
                     justifyContent: "space-around",
                   }}
                 >

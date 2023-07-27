@@ -59,8 +59,8 @@ const columns = [
     format: (value) => value.toLocaleString("en-US"),
   },
   {
-    id: "",
-    label: "",
+    id: "Edit/Delete",
+    label: "Edit/Delete",
     minWidth: 170,
     align: "center",
     format: (value) => value.toLocaleString("en-US"),
