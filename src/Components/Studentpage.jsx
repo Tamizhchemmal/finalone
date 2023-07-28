@@ -270,6 +270,7 @@ function Studentpage() {
               {/* /modal popup for student Creation */}
               <Modal
                 show={show}
+                className="mods"
                 onHide={handleClose}
                 backdrop="static"
                 keyboard={false}

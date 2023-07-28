@@ -64,7 +64,7 @@ const columns = [
   {
     id: "paymentmode",
     label: "Payment Mode",
-    minWidth: 170,
+    minWidth: 180,
     align: "center",
     format: (value) => value.toLocaleString("en-US"),
   },
@@ -75,10 +75,7 @@ const columns = [
     align: "center",
     format: (value) => value.toLocaleString("en-US"),
   },
-  
-  
-  
- 
+
   {
     id: "edit/delete",
     label: "Edit/Delete",
@@ -86,25 +83,26 @@ const columns = [
     align: "center",
     format: (value) => value.toLocaleString("en-US"),
   },
- 
 ];
 //table
 
 function Trainerpage() {
   const [show, setShow] = useState(false);
   const [tableshow, setTableshow] = useState(false);
+  const [search, setSearch] = useState("");
   const [trainerInput, setTrainerinput] = useState({
     name: "",
     mobilenumber: "",
     email: "",
     course: "",
     companyname: "",
-    paymentmode:"",
+    paymentmode: "",
     password: "",
     confirmpassword: "",
-    paymentdetails:"",
+    paymentdetails: "",
+    role: "trainer",
   });
-
+  console.log(search);
   const [courseList, setCourseList] = useState([
     {
       id: 1,
@@ -128,9 +126,23 @@ function Trainerpage() {
     },
   ]);
 
+  const [paymentmode, setPayment] = useState([
+    {
+      id: 1,
+      name: "GPAY NUMBER",
+    },
+    {
+      id: 2,
+      name: "UPI",
+    },
+    {
+      id: 3,
+      name: "BANK ACCOUNT",
+    },
+  ]);
+
   const handleChange = (e) => {
     setTrainerinput({ ...trainerInput, [e.target.name]: e.target.value });
-  
   };
 
   const handleClose = () => {
@@ -179,29 +191,27 @@ function Trainerpage() {
   // Table content End
 
   // date Change
-  
-  const [errors, setErrors] = useState('');
+
+  const [errors, setErrors] = useState("");
   const submitStudent = async (e) => {
     e.preventDefault();
-   
+
     if (trainerInput.password !== trainerInput.confirmpassword) {
-      setErrors('Password Should Be Same')
+      setErrors("Password Should Be Same");
     } else {
-       await axios.post(
-          "https://64b638a2df0839c97e1528f4.mockapi.io/trainers",
-          { trainerInput }
-        );
+      await axios.post("https://64b638a2df0839c97e1528f4.mockapi.io/trainers", {
+        trainerInput,
+      });
       console.log(trainerInput);
-    setErrors('')
-    alert('trainer Created')
-    e.target.reset();
+      setErrors("");
+      alert("trainer Created");
+      setShow(false);
+      e.target.reset();
     }
- 
-    
+
     e.target.reset();
   };
   //
-
 
   return (
     <>
@@ -216,7 +226,7 @@ function Trainerpage() {
                 <div
                   style={{
                     display: "flex",
-                   
+
                     justifyContent: "space-around",
                   }}
                 >
@@ -225,6 +235,7 @@ function Trainerpage() {
                       type="search"
                       placeholder="Search Trainer..."
                       id="searchbar-ref"
+                      onChange={(e) => setSearch(e.target.value)}
                     ></input>
                     <FcSearch id="search-icon" />
                   </div>{" "}
@@ -238,6 +249,7 @@ function Trainerpage() {
               {/* /modal popup for student Creation */}
               <Modal
                 show={show}
+                className="mods"
                 onHide={handleClose}
                 backdrop="static"
                 keyboard={false}
@@ -295,7 +307,7 @@ function Trainerpage() {
                             onChange={handleChange}
                           ></input>
                         </div>
-                    
+
                         <div className="inputstudent">
                           <input
                             type="text"
@@ -307,19 +319,22 @@ function Trainerpage() {
                             required
                           ></input>
                         </div>
-                        
-                      
-                       
-                       
-                        <div className="inputstudent">
-                          <input
-                            type="text"
+
+                        <div>
+                          <select
+                            id="paymentmode"
                             name="paymentmode"
-                            placeholder="Payment Mode"
-                            autoComplete="off"
-                            onChange={handleChange}
+                            className="referaldropdown"
                             required
-                          ></input>
+                            onChange={handleChange}
+                          >
+                            <option value="none">Payment Mode</option>
+                            {paymentmode.map((paymentmode, index1) => (
+                              <option key={index1} value={paymentmode.name}>
+                                {paymentmode.name}
+                              </option>
+                            ))}
+                          </select>
                         </div>
                         <div className="inputstudent">
                           <input
@@ -331,8 +346,7 @@ function Trainerpage() {
                             required
                           ></input>
                         </div>
-                      
-                       
+
                         <div>
                           <select
                             id="courseName"
@@ -350,34 +364,36 @@ function Trainerpage() {
                           </select>
                         </div>
                         <div className="inputtrainer">
-                        <input
-                          type="Password"
-                          id="input-pwd"
-                          name="password"
-                          placeholder="Password"
-                          autoComplete="off"
-                          onChange={handleChange}
-                          required
-                        ></input>
-                      </div>
-                      <div className="inputtrainer">
-                        <input
-                          type="Password"
-                          id="input-conpwd"
-                          name="confirmpassword"
-                          placeholder="Confirm Password"
-                          autoComplete="off"
-                          onChange={handleChange}
-                          required
-                        ></input>
-                      </div>
+                          <input
+                            type="Password"
+                            id="input-pwd"
+                            name="password"
+                            placeholder="Password"
+                            autoComplete="off"
+                            onChange={handleChange}
+                            required
+                          ></input>
+                        </div>
+                        <div className="inputtrainer">
+                          <input
+                            type="Password"
+                            id="input-conpwd"
+                            name="confirmpassword"
+                            placeholder="Confirm Password"
+                            autoComplete="off"
+                            onChange={handleChange}
+                            required
+                          ></input>
+                        </div>
                       </div>
                     </div>
                     {errors ? (
                       <p style={{ color: "red", textAlign: "center" }}>
-                      {errors}
+                        {errors}
                       </p>
-                    ) : ""}
+                    ) : (
+                      ""
+                    )}
                     <Modal.Footer>
                       <button type="submit" id="btn-createrefmodal">
                         Create
@@ -386,7 +402,7 @@ function Trainerpage() {
                   </form>
                 </Modal.Body>
               </Modal>
-              {/* Table for Student */}
+              {/* Table for Trainer */}
               <div id="reftable">
                 <div className="tableData">
                   <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -416,6 +432,11 @@ function Trainerpage() {
                               page * rowsPerPage,
                               page * rowsPerPage + rowsPerPage
                             )
+                            .filter((apiData) => {
+                              return search.toLowerCase() === ''
+                                ? apiData
+                                : apiData.trainerInput.name.toLowerCase().includes(search)
+                            })
                             .map((apiData) => {
                               return (
                                 <TableRow
@@ -453,7 +474,7 @@ function Trainerpage() {
                                     style={{ fontSize: 16 }}
                                     // onClick={opnetable}
                                   >
-                                     {apiData.trainerInput.course}
+                                    {apiData.trainerInput.course}
                                   </TableCell>
                                   <TableCell
                                     align="center"
@@ -461,7 +482,7 @@ function Trainerpage() {
                                     style={{ fontSize: 16 }}
                                     // onClick={opnetable}
                                   >
-                                   {apiData.trainerInput.companyname}
+                                    {apiData.trainerInput.companyname}
                                   </TableCell>
                                   <TableCell
                                     align="center"
@@ -469,7 +490,7 @@ function Trainerpage() {
                                     style={{ fontSize: 16 }}
                                     // onClick={opnetable}
                                   >
-                                   {apiData.trainerInput.paymentmode}
+                                    {apiData.trainerInput.paymentmode}
                                   </TableCell>
                                   <TableCell
                                     align="center"
@@ -477,12 +498,9 @@ function Trainerpage() {
                                     style={{ fontSize: 16 }}
                                     // onClick={opnetable}
                                   >
-                                   {apiData.trainerInput.paymentdetails}
+                                    {apiData.trainerInput.paymentdetails}
                                   </TableCell>
-                                 
-                                
-                                
-                                  
+
                                   <TableCell
                                     align="center"
                                     id="table-body"
@@ -494,7 +512,9 @@ function Trainerpage() {
                                     />
                                     <MdDelete
                                       id="dlt-icon"
-                                      onClick={() => deleteTrainerData(apiData.id)}
+                                      onClick={() =>
+                                        deleteTrainerData(apiData.id)
+                                      }
                                     />
                                   </TableCell>
                                 </TableRow>

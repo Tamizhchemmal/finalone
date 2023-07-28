@@ -10,7 +10,6 @@ import {
   ModalTitle,
   CloseButton,
 } from "react-bootstrap";
-import { MdManageSearch } from "react-icons/md";
 import axios from "axios";
 import RefTable from "./RefTable";
 import { FcSearch } from "react-icons/fc";
@@ -35,6 +34,7 @@ function Referralpage() {
     companyname: "",
     password: "",
     confirmpassword: "",
+    role:"referral",
   });
 
   const [errors, setErrors] = useState('');

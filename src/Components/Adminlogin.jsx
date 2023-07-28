@@ -3,6 +3,13 @@ import React, { useState } from "react";
 import "../Css/login.css";
 import boss from "../Assets/Images/boss.png";
 import { useNavigate } from "react-router-dom";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import { teal } from '@mui/material/colors';
+
 
 import { TextField, Button } from "@mui/material";
 function Adminlogin() {
@@ -69,6 +76,45 @@ function Adminlogin() {
                   variant="standard"
                   required
                 />
+                <FormControl>
+                  <RadioGroup
+                    row
+                    aria-labelledby="demo-row-radio-buttons-group-label"
+                    name="row-radio-buttons-group"
+                    sx={{m:2}}
+                  >
+                    <FormControlLabel
+                      value="admin"
+                      control={<Radio size="small" sx={{
+                        color: teal[500],
+                        '&.Mui-checked': {
+                          color: teal[600],
+                        },
+                      }} /> }
+                      label="Admin"
+                    />
+                    <FormControlLabel
+                      value="trainer"
+                      control={<Radio size="small"  sx={{
+                        color: teal[500],
+                        '&.Mui-checked': {
+                          color: teal[600],
+                        },
+                      }} />}
+                      label="Trainer"
+                    />
+                    <FormControlLabel
+                      value="referral"
+                      control={<Radio size="small" sx={{
+                        color: teal[500],
+                        '&.Mui-checked': {
+                          color: teal[600],
+                        },
+                      }} />}
+                      label="Referral"
+                    />
+                  </RadioGroup>
+                </FormControl>
 
                 {error && <div>{error}</div>}
 

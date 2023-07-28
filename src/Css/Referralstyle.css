@@ -193,6 +193,13 @@ input::-webkit-inner-spin-button {
 .inputtrainer input:focus {
   box-shadow: rgba(0, 40, 97, 0.2) 2px 2px 25px;
 }
+
+.mods{
+  z-index: 9999 !important;
+  
+}
+
+
 @media screen and (max-width:1010px) {
   #heading-ref{
     font-size: 20px;
@@ -251,6 +258,5 @@ input::-webkit-inner-spin-button {
   width: 100%;
   padding: 10px 15px;
   font-size: 10px;
- 
 }
 }
